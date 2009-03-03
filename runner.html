@@ -9,16 +9,28 @@
 	<!--[if IE]><link rel="stylesheet" href="lib/ie.css" type="text/css" media="screen" charset="utf-8" /><![endif]-->
 	<script src="lib/jslib.js" type="text/javascript" charset="utf-8"></script>
 	<script src="lib/subtleslickspeed.js" type="text/javascript" charset="utf-8"></script>
-	<script src="lib/subtleslickspeed.reports.basic.js" type="text/javascript" charset="utf-8"></script>
-	<script src="tests/tests.js" type="text/javascript" charset="utf-8"></script>
+	<script src="lib/subtleslickspeed.reports.js" type="text/javascript" charset="utf-8"></script>
+	<script src="lib/subtleslickspeed.loader.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+	
+		var report = new SubtleSlickSpeed.Report(SubtleSlickSpeed.Tests);
+		var runner = new SubtleSlickSpeed.Runner(SubtleSlickSpeed.Tests);
+		
+		WindowEvents.addEvent('load', function(){
+			
+			report.element = document.getElementById('report');
+		});
+		
+	</script>
 </head>
-<body>
+<body onload="runner.run();">
+
+<input type="button" value="Run" onclick="return !runner.run();" />
+
+<div id="report">
 	
-	
-	<iframe src="tests/sample-tests.html" frameborder="0" scrolling="auto">
-		Your browser doesn't support iframes.
-		<a href="tests/sample-tests.html">IFRAME</a>
-	</iframe>
-	
+</div>
+
+
 </body>
 </html>

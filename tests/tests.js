@@ -1,3 +1,5 @@
+console.log('tests');
+/*
 // SubtleSlickSpeed.load('CSS2 Selectors', 'selectors/tests');
 // SubtleSlickSpeed.load('CSS3 Selectors', 'selectors/tests');
 // SubtleSlickSpeed.load('DOM', ['jq-tests','dojo-tests','moo-tests','proto-tests']);
@@ -29,7 +31,8 @@ iframes.innerHTML = 'lorem';
 // iframes.appendChild(test_runner1);
 
 
-WindowOnload.addEvent('load', function(){
+WindowEvents.addEvent('load', function(){
 	console.log('window.onload')
 	document.body.appendChild(iframes);
 });
+*/
