@@ -11,6 +11,14 @@
 <script type="text/javascript" charset="utf-8">
 
 
+var SubtleSlickSpeed = {};
+SubtleSlickSpeed.ABTests = {
+	'MooTools 1.2.1':{
+		url_lib:'lib/frameworks/moo-121.js',
+		url_tests:'tests/dom/moo-tests.js'
+	}
+};
+
 function init(){
 	var mySandbox = new SubtleSandbox('mySandbox')
 		.addEvent('load', function(){
