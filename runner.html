@@ -10,7 +10,6 @@
 	<script src="lib/jslib.js" type="text/javascript" charset="utf-8"></script>
 	<script src="lib/subtleslickspeed.js" type="text/javascript" charset="utf-8"></script>
 	<script src="lib/subtleslickspeed.reports.js" type="text/javascript" charset="utf-8"></script>
-	<script src="lib/subtleslickspeed.loader.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
 	
 		var report = new SubtleSlickSpeed.Report(SubtleSlickSpeed.Tests);
@@ -24,6 +23,10 @@
 	</script>
 </head>
 <body onload="runner.run();">
+
+<!-- <a href="?#tests=tests/sample/tests.js"> #tests=tests/sample/tests.js </a><br /> -->
+
+<iframe src="tests/sample/sample-tests.html?#tests=tests.js" frameborder="0" scrolling="auto"></iframe>
 
 <input type="button" value="Run" onclick="return !runner.run();" />
 <div id="report">

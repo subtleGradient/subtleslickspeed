@@ -1,4 +1,4 @@
-window.tests = {
+Sandboxed('jQuery Tests',{
 	
 	"make": function(){
 		for(var i = 0; i<250; i++){
@@ -115,4 +115,4 @@ window.tests = {
 		return $("body *").length;
 	}
 	
-}
+});

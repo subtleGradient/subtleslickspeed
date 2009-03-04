@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<script src="lib/jslib.js" type="text/javascript" charset="utf-8"></script>
+	<script src="lib/subtlesandbox.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body onload="init();">
+
+<script type="text/javascript" charset="utf-8">
+
+
+function init(){
+	var mySandbox = new SubtleSandbox('mySandbox')
+		.addEvent('load', function(){
+			console.log('mySandbox onload');
+			// console.log(this.registeredScripts);
+			for (var scriptName in this.registeredScripts) {
+				console.log('	'+scriptName);
+				if (typeof this.registeredScripts[scriptName] == 'function') {
+					console.log( this.registeredScripts[scriptName]() );
+					continue;
+				}
+				
+				for (var functionName in this.registeredScripts[scriptName]) {
+					console.log('		'+functionName);
+					if (typeof this.registeredScripts[scriptName][functionName] == 'function') {
+						console.log( this.registeredScripts[scriptName][functionName]() );
+					}
+				}
+				
+			}
+		})
+	;
+	mySandbox.loadScript('lib/frameworks/moo-121.js');
+	mySandbox.loadScript('tests/dom/moo-tests.js');
+	
+	var mySandbox1 = new SubtleSandbox('mySandbox1')
+		.addEvent('load', function(){
+			console.log('mySandbox1 onload');
+			// console.log(this.registeredScripts);
+			for (var scriptName in this.registeredScripts) {
+				console.log('	'+scriptName);
+				if (typeof this.registeredScripts[scriptName] == 'function') {
+					console.log( this.registeredScripts[scriptName]() );
+					continue;
+				}
+				
+				for (var functionName in this.registeredScripts[scriptName]) {
+					console.log('		'+functionName);
+					if (typeof this.registeredScripts[scriptName][functionName] == 'function') {
+						console.log( this.registeredScripts[scriptName][functionName]() );
+					}
+				}
+				
+			}
+		})
+	;
+	mySandbox1.loadScript('lib/frameworks/jq-132.js');
+	mySandbox1.loadScript('tests/dom/jq-tests.js');
+};
+
+
+</script>
+</body>
+</html>
