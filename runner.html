@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="lib/print.css" type="text/css" media="print" charset="utf-8" />
 	<!--[if IE]><link rel="stylesheet" href="lib/ie.css" type="text/css" media="screen" charset="utf-8" /><![endif]-->
 	<script src="lib/jslib.js" type="text/javascript" charset="utf-8"></script>
+	<script src="lib/subtlesandbox.js" type="text/javascript" charset="utf-8"></script>
 	<script src="lib/subtleslickspeed.js" type="text/javascript" charset="utf-8"></script>
 	<script src="lib/subtleslickspeed.reports.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
@@ -15,18 +16,27 @@
 		var report = new SubtleSlickSpeed.Report(SubtleSlickSpeed.Tests);
 		var runner = new SubtleSlickSpeed.Runner(SubtleSlickSpeed.Tests);
 		
-		WindowEvents.addEvent('load', function(){
+		WindowEvents.addEvents({
+			'load:tests': function(){
+				console.log('WindowEvents:load:tests:runner.run');
+				runner.run();
+			},
 			
-			report.element = document.getElementById('report');
+			'load': function(){
+				report.element = document.getElementById('report');
+			}
+		});
+		WindowEvents.addEvent('load', function(){
+			console.log('WindowEvents:load:loadScript');
+			SubtleSandbox.loadScript(Object.fromQueryString( document.location.hash.replace(/^#/,'') )['tests']);
 		});
 		
 	</script>
 </head>
-<body onload="runner.run();">
+<body>
 
-<!-- <a href="?#tests=tests/sample/tests.js"> #tests=tests/sample/tests.js </a><br /> -->
-
-<iframe src="tests/sample/sample-tests.html?#tests=tests.js" frameborder="0" scrolling="auto"></iframe>
+<a href="?#tests=tests/sample/tests.js"> #tests=tests/sample/tests.js </a><br />
+<a href="?#tests=tests/sample-sandboxed/tests.js"> #tests=tests/sample-sandboxed/tests.js </a><br />
 
 <input type="button" value="Run" onclick="return !runner.run();" />
 <div id="report">
