@@ -1,4 +1,4 @@
-Sandboxed('MooTools Tests',{
+new SubtleSlickSpeed.Test('MooTools',{
 	
 	"make": function(){
 		for(var i = 0; i<250; i++){
