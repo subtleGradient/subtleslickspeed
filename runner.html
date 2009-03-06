@@ -18,7 +18,7 @@
 		
 		WindowEvents.addEvents({
 			'load:tests': function(){
-				console.log('WindowEvents:load:tests:runner.run');
+				/* console.log('WindowEvents:load:tests:runner.run'); */
 				report.addTests(SubtleSlickSpeed.Tests);
 				runner.run();
 			},
@@ -28,7 +28,7 @@
 			}
 		});
 		WindowEvents.addEvent('load', function(){
-			console.log('WindowEvents:load:loadScript');
+			/* console.log('WindowEvents:load:loadScript'); */
 			SubtleSandbox.loadScript(Object.fromQueryString( document.location.hash.replace(/^#/,'') )['tests']);
 		});
 		
