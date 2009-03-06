@@ -1,7 +1,6 @@
 new SubtleSlickSpeed.Test('MooTools',{
 	
-	"make": function(){
-		
+	"make": function(i){
 		new Element('ul', { id:'setid'+i, 'class':'fromcode'})
 			.inject(document.body)
 			.adopt(
@@ -13,28 +12,28 @@ new SubtleSlickSpeed.Test('MooTools',{
 		return $$('ul.fromcode').length;
 	},
 	
-	"indexof": function(){
+	"indexof": function(i){
 		var id,ul,index;
 		id = $('setid150');
 		index = $$('ul').indexOf(id);
 		return index;
 	},
 	
-	"bind": function(){
+	"bind": function(i){
 		return $$('ul > li').addEvent('click', $empty).length;
 	},
 	
-	"attr": function(){
+	"attr": function(i){
 		return $$('ul').get('id').length;
 	},
 	
-	"bindattr": function(){
+	"bindattr": function(i){
 		return $$('ul > li').map(function(el){
 			return el.addEvent('mouseover', $empty).set('rel','touched').removeEvent('mouseover', $empty);
 		}).length;
 	},
 	
-	"table": function(){
+	"table": function(i){
 		
 		new Element('table',{ 'class':'madetable' })
 			.inject(document.body)
@@ -47,74 +46,74 @@ new SubtleSlickSpeed.Test('MooTools',{
 		return $$('tr td').length;
 	},
 	
-	"addanchor": function(){
+	"addanchor": function(i){
 		return $$('ul.fromcode > li').map(function(el){
 			return el.grab(new Element('a',{ html:'link', href:'http://example.com' }));
 		}).length;
 	},
 	
-	"alt-add": function(){
+	"alt-add": function(i){
 		return $$('ul.fromcode > li').map(function(el){
 			return el.grab(new Element('a',{ html:'link', href:'http://example.com' }));
 		}).length;
 	},
 	
-	"create": function(){
+	"create": function(i){
 		$(document.body).grab(new Element('div', {rel: 'foo', html: 'test'}));
 		return $$("[rel^='foo']").length;
 	},
 	
-	"append": function(){
+	"append": function(i){
 		$(document.body).grab(new Element('div', {rel: 'foo2'}));
 		return $$('div[rel^="foo2"]').length;
 	},
 	
-	"addclass-odd": function(){
+	"addclass-odd": function(i){
 		return $$('div').filter(function(d, i){
 			d.addClass('added');
 			if (i % 2) return d.addClass('odd');
 		}).length;
 	},
 	
-	"style": function(){
+	"style": function(i){
 		return $$('div.added').setStyles({ 'background-color':'#ededed', color:'#fff' }).length;
 	},
 	
-	"confirm-added": function(){
+	"confirm-added": function(i){
 		return $$('div.added').length;
 	},
 	
-	"removeclass": function(){
+	"removeclass": function(i){
 		return $$('div.added').removeClass('added').length;
 	},
 	
-	"sethtml": function(){
+	"sethtml": function(i){
 		return $$('div').set('html', "<p>new content</p>").length;
 	},
 	
-	"sethtml-alt": function(){
+	"sethtml-alt": function(i){
 		return $$('div.odd').filter(function(div,i){
 			if (i % 50 === 1) return div.set('html', "<p>alt content</p>");
 		}).length;
 	},
 	
-	"insertbefore": function(){
+	"insertbefore": function(i){
 		return $$('ul.fromcode a').map(function(a){
 			new Element('p', {html: 'A Link'}).injectBefore(a);
 		}).length;
 	},
 	
-	"insertafter": function(){
+	"insertafter": function(i){
 		return $$('ul.fromcode a').map(function(a){
 			new Element('p', {html: 'A Link'}).injectAfter(a);
 		}).length;
 	},
 	
-	destroy: function(){ 
+	destroy: function(i){ 
 		return $$('ul.fromcode').dispose().length;
 	},
 	
-	finale: function(){
+	finale: function(i){
 		$$('body *').dispose();
 		return $$('body *').length;
 	}

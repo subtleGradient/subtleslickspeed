@@ -1,116 +1,105 @@
-Sandboxed('jQuery Tests',{
+new SubtleSlickSpeed.Test('jQuery',{
 	
-	"make": function(){
-		for(var i = 0; i<250; i++){
-			$("<ul id='setid" + i + "' class='fromcode'></ul>")
-				.appendTo("body")
-				.append("<li>one</li><li>two</li><li>three</li>");
-		}
+	"make": function(i){
+		$("<ul id='setid" + i + "' class='fromcode'></ul>")
+			.appendTo("body")
+			.append("<li>one</li><li>two</li><li>three</li>");
 		return $("ul.fromcode").length;
 	},
 	
-	"indexof" : function(){
+	"indexof" : function(i){
 		var n, id;
-		for(var i = 0; i < 20; i++){
-			id = $("#setid150");
-			n = $("ul").index(id)
-		}
+		id = $("#setid150");
+		n = $("ul").index(id)
 		return n;
 	},
 	
-	"bind" : function(){
-		return $("ul > li").bind("click", function(){ }).length;
+	"bind" : function(i){
+		return $("ul > li").bind("click", function(i){ }).length;
 	},
 	
-	"attr" : function(){
-		return $("ul").map(function(){ return $(this).attr("id") }).length;
+	"attr" : function(i){
+		return $("ul").map(function(i){ return $(this).attr("id") }).length;
 	},
 	
-	"bindattr" : function(){
+	"bindattr" : function(i){
 		return $("ul > li")
-			.bind("mouseover", function(){ })
+			.bind("mouseover", function(i){ })
 			.attr("rel", "jq")
 			.unbind("mouseover")
 			.length;
 	},
 	
-	"addanchor" : function(){
+	"addanchor" : function(i){
 		return $(".fromcode > li").append("<a href='http://example.com'>link</a>").length;
 	},
 	
-	"alt-add" : function(){
-		return $(".fromcode > li").each(function(){
+	"alt-add" : function(i){
+		return $(".fromcode > li").each(function(i){
 			$("<a href='http://example.com'>link2</a>").appendTo(this);
 		}).length;
 	},
 	
-	"create": function(){
-		for(var i = 0; i<500; i++){
-			$("body").append("<div rel='foo'>test</div>");
-		}
+	"create": function(i){
+		$("body").append("<div rel='foo'>test</div>");
 		return $("[rel^='foo']").length;
 	},
 	
-	"append" : function(){
-		for(var i = 0; i<500; i++){
-			$("<div rel='foo2'>test2</div>").appendTo("body");
-		}
+	"append" : function(i){
+		$("<div rel='foo2'>test2</div>").appendTo("body");
 		return $("div[rel^='foo2']").length;
 	},
 	
-	"addclass-odd" : function(){
+	"addclass-odd" : function(i){
 		return $("div").addClass("added").filter(":odd").addClass("odd").length;
 	},
 	
 	
-	"style" : function(){
+	"style" : function(i){
 		return $(".added").css({ backgroundColor:"#ededed", color:"#fff" }).length;
 	},
 
-	"confirm-added" : function(){
+	"confirm-added" : function(i){
 		return $("div.added").length;
 	},
 	
-	"removeclass" : function(){
+	"removeclass" : function(i){
 		return $(".added").removeClass("added").length;
 	},
 	
-	"table": function(){
-		for(var i = 0; i < 40; i++){
-			$("<table class='madetable'></table>")
-				.appendTo("body")
-				.html("<tr><td>first</td></tr>")
-				.find("tr").prepend("<td>before</td>");
-		}
+	"table": function(i){
+		$("<table class='madetable'></table>")
+			.appendTo("body")
+			.html("<tr><td>first</td></tr>")
+			.find("tr").prepend("<td>before</td>");
 		return $("tr td").length;
 	},
 	
-	"sethtml": function(){
-		return $("div").each(function(){
+	"sethtml": function(i){
+		return $("div").each(function(i){
 			this.innerHTML = "<p>jquery's new content</p>";
 		}).length;	
 	},
 	
-	"sethtml-alt" : function(){
-		// only reducing this because .html can't handle 5000 either
+	"sethtml-alt" : function(i){
 		return $(".odd").map(function(i){
 			return i % 50 === 0 ? this : null;
 		}).length;
 	},
 	
-	"insertbefore" : function(){
+	"insertbefore" : function(i){
 		return $(".fromcode a").before($("<p>A Link</p>")).length;
 	},
 	
-	"insertafter" : function(){
+	"insertafter" : function(i){
 		return $(".fromcode a").after($("<p>After Link</p>")).length;
 	},
 	
-	destroy: function(){
+	destroy: function(i){
 		return $(".fromcode").remove().length;
 	},
 	
-	finale: function(){
+	finale: function(i){
 		$("body").empty();
 		return $("body *").length;
 	}
