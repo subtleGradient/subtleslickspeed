@@ -1,7 +1,5 @@
 // Add a test directly
-new SubtleSlickSpeed.Test("getByTag0", function(){
-	return document.getElementsByTagName('*');
-});
+new SubtleSlickSpeed.Test("getByTag0", function(){ return document.getElementsByTagName('*'); });
 
 // Add tests into an iframe from another file
 var mySandbox = new SubtleSandbox('mySandbox');

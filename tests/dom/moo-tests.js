@@ -1,26 +1,22 @@
 new SubtleSlickSpeed.Test('MooTools',{
 	
 	"make": function(){
-		for(var i = 0; i<250; i++){
-			
-			new Element('ul', { id:'setid'+i, 'class':'fromcode'})
-				.inject(document.body)
-				.adopt(
-					new Element('li', { html:'one' }),
-					new Element('li', { html:'two' }),
-					new Element('li', { html:'three' })
-				)
-			;
-		}
+		
+		new Element('ul', { id:'setid'+i, 'class':'fromcode'})
+			.inject(document.body)
+			.adopt(
+				new Element('li', { html:'one' }),
+				new Element('li', { html:'two' }),
+				new Element('li', { html:'three' })
+			)
+		;
 		return $$('ul.fromcode').length;
 	},
 	
 	"indexof": function(){
 		var id,ul,index;
-		for(var i = 0; i<20; i++){
-			id = $('setid150');
-			index = $$('ul').indexOf(id);
-		}
+		id = $('setid150');
+		index = $$('ul').indexOf(id);
 		return index;
 	},
 	
@@ -37,19 +33,17 @@ new SubtleSlickSpeed.Test('MooTools',{
 			return el.addEvent('mouseover', $empty).set('rel','touched').removeEvent('mouseover', $empty);
 		}).length;
 	},
-
+	
 	"table": function(){
-		for(var i = 0; i<40; i++){
-			
-			new Element('table',{ 'class':'madetable' })
-				.inject(document.body)
-				.grab(
-					new Element('tr')
-						.grab( new Element('td',{ html:'first' }) )
-						.grab( new Element('td'), 'top')
-				)
-			;
-		}
+		
+		new Element('table',{ 'class':'madetable' })
+			.inject(document.body)
+			.grab(
+				new Element('tr')
+				.grab( new Element('td',{ html:'first' }) )
+				.grab( new Element('td'), 'top')
+			)
+		;
 		return $$('tr td').length;
 	},
 	
@@ -58,7 +52,7 @@ new SubtleSlickSpeed.Test('MooTools',{
 			return el.grab(new Element('a',{ html:'link', href:'http://example.com' }));
 		}).length;
 	},
-
+	
 	"alt-add": function(){
 		return $$('ul.fromcode > li').map(function(el){
 			return el.grab(new Element('a',{ html:'link', href:'http://example.com' }));
@@ -66,16 +60,12 @@ new SubtleSlickSpeed.Test('MooTools',{
 	},
 	
 	"create": function(){
-		for (var i = 0; i<500; i++){
-			$(document.body).grab(new Element('div', {rel: 'foo', html: 'test'}));
-		}
+		$(document.body).grab(new Element('div', {rel: 'foo', html: 'test'}));
 		return $$("[rel^='foo']").length;
 	},
 	
 	"append": function(){
-		for (var i = 0; i<500; i++){
-			$(document.body).grab(new Element('div', {rel: 'foo2'}));
-		}
+		$(document.body).grab(new Element('div', {rel: 'foo2'}));
 		return $$('div[rel^="foo2"]').length;
 	},
 	
