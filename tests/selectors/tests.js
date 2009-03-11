@@ -1,5 +1,5 @@
-// SubtleSlickSpeed.load('jq-tests','dojo-tests','moo-tests','proto-tests');
-new SubtleSlickSpeed.ABTest('CSS Selectors',{
+/*
+new SubtleSlickSpeed.Test('CSS Selectors',{
 	
 	template:'template.html',
 	default_tests:{
@@ -43,3 +43,43 @@ new SubtleSlickSpeed.ABTest('CSS Selectors',{
 	}
 	
 });
+*/
+
+
+var selectors = [
+	'div',
+	'.example',
+	'[id]',
+];
+(function(){
+	var framework = {
+		name: 'MooTools 1.2.1',
+		js:'moo-121',
+		queryFn:'$$'
+	}
+	
+	var url = 'lib/frameworks/'+framework.js+'.js';
+	var win = SubtleSlickSpeed.Test.Sandboxed(framework.name, ["tests/selectors/template.js", url]);
+	setTimeout(function(){
+		Array.each(selectors, function(selector){
+			win.eval("new SubtleSlickSpeed.Test('"+String.escapeSingle(framework.name)+";;;"+selector+"', function(){ return "+framework.queryFn+"('"+String.escapeSingle(selector)+"') })");
+		});
+	}, 100);
+})();
+
+(function(){
+	var framework = {
+		name: 'jQuery 1.2.6',
+		js:'jq-126',
+		queryFn:'$'
+	}
+	
+	var url = 'lib/frameworks/'+framework.js+'.js';
+	var win = SubtleSlickSpeed.Test.Sandboxed(framework.name, ["tests/selectors/template.js", url]);
+	setTimeout(function(){
+		Array.each(selectors, function(selector){
+			win.eval("new SubtleSlickSpeed.Test('"+String.escapeSingle(framework.name)+";;;"+selector+"', function(){ return "+framework.queryFn+"('"+String.escapeSingle(selector)+"') })");
+		});
+	}, 100);
+})();
+
