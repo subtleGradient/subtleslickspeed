@@ -145,13 +145,15 @@ thead\n\
 tr\n\
 ul\n\
 ul.toc\n\
-var'.split('\n');
+var\n\
+'.split('\n');
 
 function loadFrameworkTests(framework){
 	var url = 'lib/frameworks/'+framework.js+'.js';
 	var win = SubtleSlickSpeed.Test.Sandboxed(framework.name, ["tests/selectors/template.js", url]);
 	WindowEvents.addEvent('load:'+url, function(){
 		Array.each(selectors, function(selector){
+			if (!selector) return;
 			win.eval("new SubtleSlickSpeed.Test('"+selector+";;;"+String.escapeSingle(framework.name)+"', function(){ return "+framework.queryFn+"('"+String.escapeSingle(selector)+"') })");
 		});
 	});
@@ -178,6 +180,10 @@ var Frameworks = {
 	'MooTools 1.2.1':{
 		js:'moo-121',
 		queryFn:'$$'
+	},
+	'Slick (pre-alpha)':{
+		js:'slick',
+		queryFn:'document.search'
 	}
 };
 

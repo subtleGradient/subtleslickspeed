@@ -21,9 +21,9 @@
 			'load:tests': function(){
 				/* console.log('WindowEvents:load:tests:runner.run'); */
 				report.addTests(SubtleSlickSpeed.Tests);
-				setTimeout(function(){
-					runner.run();
-				}, 250);
+				// setTimeout(function(){
+				// 	runner.run();
+				// }, 250);
 			},
 			
 			'load': function(){
@@ -36,12 +36,23 @@
 		});
 		
 	</script>
+	<style type="text/css" media="screen">
+		body{
+			padding:1em;
+		}
+	</style>
 </head>
 <body>
 
-<input type="button" value="Run" onclick="runner.run();" />
+
+<h1><ins>Subtle</ins>SlickSpeed <em>(pre-alpha)</em> <input type="button" value="Run" onclick="runner.run();" /></h1>
+
 <div id="report">
 </div>
+<pre id="log" class="box">
+</pre>
+
+<p class="small"> Copyright &copy; 2009 Thomas Aylott (SubtleGradient.com) </p>
 
 </body>
 </html>
