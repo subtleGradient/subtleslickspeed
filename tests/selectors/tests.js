@@ -51,35 +51,34 @@ var selectors = [
 	'.example',
 	'[id]',
 ];
-(function(){
-	var framework = {
-		name: 'MooTools 1.2.1',
-		js:'moo-121',
-		queryFn:'$$'
-	}
-	
-	var url = 'lib/frameworks/'+framework.js+'.js';
-	var win = SubtleSlickSpeed.Test.Sandboxed(framework.name, ["tests/selectors/template.js", url]);
-	setTimeout(function(){
-		Array.each(selectors, function(selector){
-			win.eval("new SubtleSlickSpeed.Test('"+String.escapeSingle(framework.name)+";;;"+selector+"', function(){ return "+framework.queryFn+"('"+String.escapeSingle(selector)+"') })");
-		});
-	}, 100);
-})();
 
-(function(){
-	var framework = {
-		name: 'jQuery 1.2.6',
-		js:'jq-126',
-		queryFn:'$'
-	}
-	
+WindowEvents.addEvent('load:'+"load:lib/frameworks/moo-121.js", function(){
+	console.log("LOAD:LIB/FRAMEWORKS/MOO-121.JS")
+});
+
+function loadFrameworkTests(framework){
 	var url = 'lib/frameworks/'+framework.js+'.js';
 	var win = SubtleSlickSpeed.Test.Sandboxed(framework.name, ["tests/selectors/template.js", url]);
-	setTimeout(function(){
+	WindowEvents.addEvent('load:'+url, function(){
 		Array.each(selectors, function(selector){
 			win.eval("new SubtleSlickSpeed.Test('"+String.escapeSingle(framework.name)+";;;"+selector+"', function(){ return "+framework.queryFn+"('"+String.escapeSingle(selector)+"') })");
 		});
-	}, 100);
-})();
+	});
+}
+
+
+loadFrameworkTests({
+	name: 'MooTools 1.2.1',
+	js:'moo-121',
+	queryFn:'$$'
+});
+
+loadFrameworkTests({
+	name: 'jQuery 1.2.6',
+	js:'jq-126',
+	queryFn:'$'
+});
+
+
+
 
