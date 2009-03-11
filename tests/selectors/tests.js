@@ -47,105 +47,46 @@ new SubtleSlickSpeed.Test('CSS Selectors',{
 
 
 var selectors = '\
+body\n\
+div\n\
+body div\n\
+div p\n\
+div > p\n\
+div + p\n\
+div ~ p\n\
+div[class^=exa][class$=mple]\n\
+div p a\n\
+div, p, a\n\
+.note\n\
+div.example\n\
+ul .tocline2\n\
+div.example, div.note\n\
 #title\n\
 h1#title\n\
-div#title\n\
-.company\n\
-.copyright\n\
-.described\n\
-.dtd-example\n\
-.example\n\
-.figure\n\
-.fn\n\
-.head\n\
-.index-inst\n\
-.inner\n\
-.meaning\n\
-.note\n\
-.origin\n\
-.pattern\n\
-.profile\n\
-.refs\n\
-.selectorsReview\n\
-.subtoc\n\
-.title\n\
-.toc\n\
-.tocline2\n\
-.tocline3\n\
-.tocline4\n\
-.tprofile\n\
-.url\n\
-.vcard\n\
-.wrapper\n\
-a\n\
-a.inner\n\
-.url.fn\n\
-a.url.fn\n\
-abbr\n\
-acronym\n\
-b\n\
-br\n\
-cite\n\
-code\n\
-dd\n\
-dd.vcard\n\
-dfn\n\
-div\n\
-div.example\n\
-div.figure\n\
-div.head\n\
-div.note\n\
-div.profile\n\
-div.subtoc\n\
-div.wrapper\n\
-dl\n\
-dl.refs\n\
-dt\n\
-em\n\
-h1#title\n\
-h2\n\
-h3\n\
-h4\n\
-h5\n\
-hr\n\
-img\n\
-li\n\
-li.tocline2\n\
-li.tocline3\n\
-li.tocline4\n\
-ol\n\
-p\n\
-p.copyright\n\
-p.note\n\
-pre\n\
-pre.dtd-example\n\
-span\n\
-span.company\n\
-span.fn\n\
-span.index-inst\n\
-span.note\n\
-strong\n\
-sup\n\
-table\n\
-table.selectorsReview\n\
-table.tprofile\n\
-tbody\n\
-td\n\
-td.described\n\
-td.meaning\n\
-td.origin\n\
-td.pattern\n\
-th\n\
-th.described\n\
-th.meaning\n\
-th.origin\n\
-th.pattern\n\
-th.title\n\
-thead\n\
-tr\n\
-ul\n\
-ul.toc\n\
-var\n\
+div #title\n\
+ul.toc li.tocline2\n\
+ul.toc > li.tocline2\n\
+h1#title + div > p\n\
+h1[id]:contains(Selectors)\n\
+a[href][lang][class]\n\
+div[class]\n\
+div[class=example]\n\
+div[class^=exa]\n\
+div[class$=mple]\n\
+div[class*=e]\n\
+div[class|=dialog]\n\
+div[class!=made_up]\n\
+div[class~=example]\n\
+div:not(.example)\n\
+p:contains(selectors)\n\
+p:nth-child(even)\n\
+p:nth-child(2n)\n\
+p:nth-child(odd)\n\
+p:nth-child(2n+1)\n\
+p:nth-child(n)\n\
+p:only-child\n\
+p:last-child\n\
+p:first-child\n\
 '.split('\n');
 
 function loadFrameworkTests(framework){
