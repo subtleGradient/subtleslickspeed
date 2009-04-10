@@ -91,11 +91,11 @@ p:first-child\n\
 
 function loadFrameworkTests(framework){
 	var url = 'lib/frameworks/'+framework.js+'.js';
-	var win = SubtleSlickSpeed.Test.Sandboxed(framework.name, ["tests/selectors/template.js", url]);
+	var win = SubtleSlickSpeed.Test.SubtleSandboxed(framework.name, ["tests/selectors/template.js", url]);
 	WindowEvents.addEvent('load:'+url, function(){
 		Array.each(selectors, function(selector){
 			if (!selector) return;
-			win.eval("new SubtleSlickSpeed.Test('"+selector+";;;"+String.escapeSingle(framework.name)+"', function(){ return "+framework.queryFn+"('"+String.escapeSingle(selector)+"') })");
+			win.eval("new SubtleSlickSpeed.Test('"+String.escapeSingle(selector)+";;;"+String.escapeSingle(framework.name)+"', function(){ return "+framework.queryFn+"('"+String.escapeSingle(selector)+"') })");
 		});
 	});
 }

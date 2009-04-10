@@ -19,16 +19,15 @@
 		
 		WindowEvents.addEvents({
 			'load:tests': function(){
-				/* console.log('WindowEvents:load:tests:runner.run'); */
+				// console.log('WindowEvents:load:tests:runner.run'); 
 				report.addTests(SubtleSlickSpeed.Tests);
+				document.getElementById('report').appendChild(report.toElement());
 				// setTimeout(function(){
 				// 	runner.run();
 				// }, 250);
 			},
 			
-			'load': function(){
-				document.getElementById('report').appendChild(report.toElement());
-			}
+			'load': function(){}
 		});
 		WindowEvents.addEvent('load', function(){
 			/* console.log('WindowEvents:load:loadScript'); */
@@ -53,6 +52,8 @@
 
 <pre id="log" class="box">
 </pre>
+<div id="tests">
+</div>
 <div id="report">
 </div>
 
