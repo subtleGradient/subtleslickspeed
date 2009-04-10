@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<script src="lib/jslib.js" type="text/javascript" charset="utf-8"></script>
+	<script src="lib/subtlesandbox.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body onload="init();">
+<script type="text/javascript" charset="utf-8">
+var box;
+var boxq;
+function init(){
+	box = new SubtleSandbox('Box', 'strict');
+	boxq = new SubtleSandbox('BoxQ');
+	
+	box.addEvent('load', function(){
+		console.log(box.eval('document.compatMode'));
+	});
+	boxq.addEvent('load', function(){
+		console.log(boxq.eval('document.compatMode'));
+	});
+	
+	// box.loadScript('lib/jslib.js');
+};
+
+</script>
+</body>
+</html>
