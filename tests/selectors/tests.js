@@ -91,7 +91,7 @@ p:first-child\n\
 
 function loadFrameworkTests(framework){
 	var url = 'lib/frameworks/'+framework.js+'.js';
-	var win = SubtleSlickSpeed.Test.Sandboxed(framework.name, ["tests/selectors/template.js", url]);
+	var win = SubtleSlickSpeed.Test.SubtleSandboxed(framework.name, ["tests/selectors/template.js", url]);
 	WindowEvents.addEvent('load:'+url, function(){
 		Array.each(selectors, function(selector){
 			if (!selector) return;

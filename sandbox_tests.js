@@ -1,4 +1,4 @@
-Sandboxed('Sandboxed Tests',{
+SubtleSandboxed('SubtleSandboxed Tests',{
     test1: function(){
         return document.getElementsByTagName('*').length;
     },
