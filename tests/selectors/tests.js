@@ -146,14 +146,6 @@ var Frameworks = {
 
 if (!window.didThisAlready) {
 	
-	Object.each(Frameworks, function(framework, frameworkName){
-		
-		framework.name = frameworkName;
-		// console.log(q.exclude.indexOf(frameworkName))
-		if (!shouldExclude(Frameworks[frameworkName].js))
-			loadFrameworkTests(framework);
-	});
-	
 	function shouldExclude(str){
 		var q = Object.fromQueryString(document.location.search);
 		if (!q.exclude) return false;
@@ -165,6 +157,14 @@ if (!window.didThisAlready) {
 		}
 		return false;
 	};
+	
+	Object.each(Frameworks, function(framework, frameworkName){
+		
+		framework.name = frameworkName;
+		// console.log(q.exclude.indexOf(frameworkName))
+		if (!shouldExclude(Frameworks[frameworkName].js))
+			loadFrameworkTests(framework);
+	});
 	
 	var html = [], ex = document.getElementById('exclude');
 	html.push('Exclude: ');
