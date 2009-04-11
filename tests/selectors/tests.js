@@ -91,11 +91,19 @@ p:first-child\n\
 
 function loadFrameworkTests(framework){
 	var url = 'lib/frameworks/'+framework.js+'.js';
-	var win = SubtleSlickSpeed.Test.SubtleSandboxed(framework.name, ["tests/selectors/template.js", url]);
-	WindowEvents.addEvent('load:'+url, function(){
+	var sandbox = new SubtleSlickSpeed.Test.Sandboxed(framework.name, ["tests/selectors/template.js", url]);
+	sandbox.addEvent('load:'+url, function(){
+		
+		// framework.queryFn = sandbox.eval(framework.queryFn);
+		
 		Array.each(selectors, function(selector){
 			if (!selector) return;
-			win.eval("new SubtleSlickSpeed.Test('"+selector+";;;"+String.escapeSingle(framework.name)+"', function(){ return "+framework.queryFn+"('"+String.escapeSingle(selector)+"') })");
+			// console.log(selector);
+			sandbox.eval("new SubtleSlickSpeed.Test('"+selector+";;;"+String.escapeSingle(framework.name)+"', function(){ return "+framework.queryFn+"('"+String.escapeSingle(selector)+"') })");
+			// with (sandbox.window)
+			// new SubtleSlickSpeed.Test(selector+";;;"+framework.name, function(){
+			// 	return framework.queryFn(selector);
+			// });
 		});
 	});
 }
@@ -122,15 +130,49 @@ var Frameworks = {
 		js:'moo-121',
 		queryFn:'$$'
 	},
+	// 'Slick (parse only)':{
+	// 	js:'slick',
+	// 	queryFn:'SubtleSlickParse'
+	// },
+	// 'Slick (parse only) nocache':{
+	// 	js:'slick',
+	// 	queryFn:'SubtleSlickParse.nocache=true; SubtleSlickParse'
+	// },
 	'Slick (pre-alpha)':{
 		js:'slick',
 		queryFn:'document.search'
 	}
 };
 
-Object.each(Frameworks, function(framework, frameworkName){
-	framework.name = frameworkName;
-	loadFrameworkTests(framework);
-});
-
-
+if (!window.didThisAlready) {
+	
+	Object.each(Frameworks, function(framework, frameworkName){
+		
+		framework.name = frameworkName;
+		// console.log(q.exclude.indexOf(frameworkName))
+		if (!shouldExclude(Frameworks[frameworkName].js))
+			loadFrameworkTests(framework);
+	});
+	
+	function shouldExclude(str){
+		var q = Object.fromQueryString(document.location.search);
+		if (!q.exclude) return false;
+		
+		q.exclude = $splat(q.exclude);
+		
+		for (var i = q.exclude.length - 1; i >= 0; i--){
+			if (q.exclude[i] == str) return true;
+		}
+		return false;
+	};
+	
+	var html = [], ex = document.getElementById('exclude');
+	html.push('Exclude: ');
+	for (var frameworkName in Frameworks) {
+		html.push('<label><input name="exclude" type="checkbox" '+ (shouldExclude(Frameworks[frameworkName].js) ? 'checked="checked"' : '') +' value="' + String.escapeDouble(Frameworks[frameworkName].js) + '" /> '+frameworkName+'</label>');
+	}
+	html.push('<input type="submit" value="Exclude" />')
+	ex.innerHTML = html.join('');
+	
+	window.didThisAlready = true;
+}

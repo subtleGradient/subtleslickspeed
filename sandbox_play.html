@@ -8,22 +8,45 @@
 </head>
 <body onload="init();">
 <script type="text/javascript" charset="utf-8">
-var box;
-var boxq;
+
+var boxs, box;
+
 function init(){
-	box = new SubtleSandbox('Box', 'strict');
-	boxq = new SubtleSandbox('BoxQ');
 	
-	box.addEvent('load', function(){
-		console.log(box.eval('document.compatMode'));
-	});
-	boxq.addEvent('load', function(){
-		console.log(boxq.eval('document.compatMode'));
-	});
+	boxs = new SubtleSandbox('Box Strict', 'strict')
+		.loadScript(['lib/jslib.js','lib/frameworks/native.js'])
+		.addEvent('load', function(){
+			console.log('"boxs" loaded');
+			console.log(this);
+			console.log(this.eval('document.title'));
+			console.log(this.window.document.title);
+			
+			with (this.window) {
+				console.log(document.title);
+				console.log(document.compatMode);
+			}
+		})
+	;
 	
-	// box.loadScript('lib/jslib.js');
+	box = new SubtleSandbox('Box')
+		.loadScript(['lib/jslib.js','lib/frameworks/native.js'])
+		.addEvent('load', function(){
+			console.log('"box" loaded');
+			console.log(this);
+			console.log(this.eval('document.title'));
+			console.log(this.window.document.title);
+			
+			with (this.window) {
+				console.log(document.title);
+				console.log(document.compatMode);
+			}
+		})
+	;
 };
 
 </script>
+
+Check the console.log
+
 </body>
 </html>

@@ -9,7 +9,8 @@
 <script type="text/javascript" charset="utf-8">
 var MSIE/*@cc_on =1@*/;
 SubtleSandboxed = function(scriptName,object){
-	parent.SubtleSandbox.sandboxes[ document.location.search.split('?')[1] ].registerScript(scriptName, object);
+	// console.log('SubtleSandbox Strict Iframe', decodeURIComponent(document.location.search.split('?')[1]));
+	parent.SubtleSandbox.sandboxes[ decodeURIComponent(document.location.search.split('?')[1]) ].registerScript(scriptName, object);
 };
 SubtleSandboxed('eval',{ 'eval': MSIE ? this : { eval:function(s){return eval(s)} } });
 </script>

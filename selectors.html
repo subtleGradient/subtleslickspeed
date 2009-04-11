@@ -5,6 +5,7 @@
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<title>SubtleSlickSpeed</title>
 	<link rel="stylesheet" href="lib/screen.css" type="text/css" media="screen" charset="utf-8" />
+	<link rel="stylesheet" href="lib/table_report.css" type="text/css" media="screen" charset="utf-8" />
 	<link rel="stylesheet" href="lib/print.css" type="text/css" media="print" charset="utf-8" />
 	<!--[if IE]><link rel="stylesheet" href="lib/ie.css" type="text/css" media="screen" charset="utf-8" /><![endif]-->
 	<script src="lib/jslib.js" type="text/javascript" charset="utf-8"></script>
@@ -49,14 +50,76 @@
 <body>
 
 
-<h1><ins>Subtle</ins>SlickSpeed <em>(pre-alpha)</em> <input type="button" value="Run" onclick="runner.run();" /></h1>
+<h1><ins>Subtle</ins>SlickSpeed <em>(alpha)</em> <input type="button" value="Run" accesskey="r" onclick="SubtleSlickSpeed.STOP = false; runner.run();" /> <input type="button" value="STOP" accesskey="s" onclick="SubtleSlickSpeed.STOP = true;" /></h1>
 
 <pre id="log" class="box">
 </pre>
-<div id="report">
+<div id="report-wrap" class="selector">
+	<div class="toolbar">
+		Graph: 
+		
+		<script type="text/javascript" charset="utf-8">
+			function graphSwap(value){
+				document.getElementById('report-wrap').className = value;
+			};
+		</script>
+		
+		<!-- <label title="Show all graphs"><input onclick="graphSwap(this.value);" type="radio" name="graph" value="show_all" /> All</label> -->
+		<label title="Caclulate graphs based on the results for everything"><input onclick="graphSwap(this.value);" type="radio" name="graph" value="All" /> Global</label>
+		<label title="Caclulate graphs based on the results for that Selector only"><input onclick="graphSwap(this.value);" type="radio" name="graph" value="selector" checked="checked" /> Selector</label>
+		<label title="Caclulate graphs based on the results for that Framework only"><input onclick="graphSwap(this.value);" type="radio" name="graph" value="framework" /> Framework</label>
+		<label title="Hide all graphs"><input onclick="graphSwap(this.value);" type="radio" name="graph" value="" /> Hide</label>
+		
+	</div>
+	<div class="toolbar">
+		Info: 
+		
+		<script type="text/javascript" charset="utf-8">
+			function infoSwap(value){
+				document.getElementById('report').className = value;
+			};
+		</script>
+		
+		<label><input onclick="infoSwap(this.value);" type="radio" name="info" value="" /> Show</label>
+		<label><input onclick="infoSwap(this.value);" type="radio" name="info" value="hide_info" checked="checked" /> Hide</label>
+	</div>
+	<div class="toolbar">
+		<strong><a href="#debug">Debug</a></strong>
+		<strong><a href="#">Stop Debugging</a></strong>
+	</div>
+	<form class="toolbar" id="exclude">
+	</form>
+	
+	
+	<script type="text/javascript" charset="utf-8">
+		var q = Object.fromQueryString(document.location.search);
+		if (q.MIN_ITERS    ) SubtleSlickSpeed.Test.MIN_ITERS     = parseInt(q.MIN_ITERS     ,10);
+		if (q.MIN_ITER_TIME) SubtleSlickSpeed.Test.MIN_ITER_TIME = parseInt(q.MIN_ITER_TIME ,10);
+		if (q.MIN_RUNS     ) SubtleSlickSpeed.Test.MIN_RUNS      = parseInt(q.MIN_RUNS      ,10);
+		if (q.MIN_RUN_TIME ) SubtleSlickSpeed.Test.MIN_RUN_TIME  = parseInt(q.MIN_RUN_TIME  ,10);
+	</script>
+	
+	
+	
+	<div id="report" class="hide_info">
+	</div>
+	
+	
+	
+	<form action="" method="get" class="toolbar">
+		Minimums:
+		<script type="text/javascript" charset="utf-8">
+			document.write('<label>Iterations     <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_ITERS     +'" name="MIN_ITERS" /></label> ');
+			document.write('<label>Runs           <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_RUNS      +'" name="MIN_RUNS" /></label> ');
+			document.write('<label>Iteration Time <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_ITER_TIME +'" name="MIN_ITER_TIME" /></label> ');
+			document.write('<label>Run Time       <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_RUN_TIME  +'" name="MIN_RUN_TIME" /></label> ');
+		</script>
+		<br />
+		<em>Beware, this could drastically increse test execution time</em>
+	</form>
 </div>
 
-<p class="small"> Copyright &copy; 2009 Thomas Aylott (SubtleGradient.com) </p>
+<p class="small"> Copyright &copy; 2009 Thomas Aylott (<a href="http://SubtleGradient.com">SubtleGradient.com</a>) | MIT License | <a href="http://github.com/subtleGradient/subtleslickspeed/tree/master" title="subtleGradient's subtleslickspeed at master - GitHub">Fork SubtleSlickSpeed on GitHub</a> </p>
 <script type="text/javascript" src="http://cetrk.com/pages/scripts/0000/0269.js"> </script>
 </body>
 </html>
