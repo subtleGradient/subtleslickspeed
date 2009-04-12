@@ -97,8 +97,6 @@
 		if (q.MIN_ITER_TIME) SubtleSlickSpeed.Test.MIN_ITER_TIME = parseInt(q.MIN_ITER_TIME ,10);
 		if (q.MIN_RUNS     ) SubtleSlickSpeed.Test.MIN_RUNS      = parseInt(q.MIN_RUNS      ,10);
 		if (q.MIN_RUN_TIME ) SubtleSlickSpeed.Test.MIN_RUN_TIME  = parseInt(q.MIN_RUN_TIME  ,10);
-		
-		if (q.REPORT_TIMEOUT) SubtleSlickSpeed.Report.TIMEOUT  = parseInt(q.REPORT_TIMEOUT  ,10);
 	</script>
 	
 	
@@ -108,16 +106,14 @@
 	
 	
 	
-	<form action="" method="get" class="toolbar" onsubmit="return confirm('Changing the minimum times could really freak out your browser. I assume you know what you\'re doing');">
+	<form action="" method="get" class="toolbar">
 		Minimums:
 		<script type="text/javascript" charset="utf-8">
-			document.write('<label>Iterations     <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_ITERS     +'" name="MIN_ITERS" /> </label> ');
-			document.write('<label>Runs           <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_RUNS      +'" name="MIN_RUNS" /> </label> ');
-			document.write('<label>Iteration Time <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_ITER_TIME +'" name="MIN_ITER_TIME" /><em>ms</em> </label> ');
-			document.write('<label>Run Time       <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_RUN_TIME  +'" name="MIN_RUN_TIME" /><em>ms</em> </label> ');
-			document.write('<label>Report Timeout <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Report.TIMEOUT     +'" name="REPORT_TIMEOUT" /><em>ms</em> </label> ');
+			document.write('<label>Iterations     <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_ITERS     +'" name="MIN_ITERS" /></label> ');
+			document.write('<label>Runs           <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_RUNS      +'" name="MIN_RUNS" /></label> ');
+			document.write('<label>Iteration Time <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_ITER_TIME +'" name="MIN_ITER_TIME" /></label> ');
+			document.write('<label>Run Time       <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_RUN_TIME  +'" name="MIN_RUN_TIME" /></label> ');
 		</script>
-		<input type="submit" value="Change Minimums" />
 		<br />
 		<em>Beware, this could drastically increse test execution time</em>
 	</form>
