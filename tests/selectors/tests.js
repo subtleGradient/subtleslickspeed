@@ -1,52 +1,6 @@
-/*
-new SubtleSlickSpeed.Test('CSS Selectors',{
-	
-	template:'template.html',
-	default_tests:{
-		selectElements:[
-			'div',
-			'p',
-			'.example',
-		]
-	}
-	tests:{
-		'jQuery 1.2.3':{
-			framework:'jq-123',
-			functions:{
-				selectElements:'$'
-			}
-		},
-		'jQuery 1.3.2':{
-			framework:'jq-132',
-			functions:{
-				selectElements:'$'
-			}
-		},
-		'Dojo 1.3':{
-			framework:'dojo',
-			functions:{
-				selectElements:'dojo.query'
-			}
-		},
-		'Prototype 1.6.0.3':{
-			framework:'proto-1603',
-			functions:{
-				selectElements:'$$'
-			}
-		},
-		'MooTools 1.2.1':{
-			framework:'moo-121',
-			functions:{
-				selectElements:'$$'
-			}
-		}
-	}
-	
-});
-*/
+if (!window.didThisAlready) {
 
-
-var selectors = '\
+var SELECTORS = SELECTORS || '\
 body\n\
 div\n\
 body div\n\
@@ -87,7 +41,10 @@ p:nth-child(n)\n\
 p:only-child\n\
 p:last-child\n\
 p:first-child\n\
-'.split('\n');
+';
+
+document.getElementById('SELECTORS').innerHTML = SELECTORS;
+SELECTORS = SELECTORS.split(/\r?\n/);
 
 function loadFrameworkTests(framework){
 	var url = 'lib/frameworks/'+framework.js+'.js';
@@ -96,7 +53,7 @@ function loadFrameworkTests(framework){
 		
 		// framework.queryFn = sandbox.eval(framework.queryFn);
 		
-		Array.each(selectors, function(selector){
+		Array.each(SELECTORS, function(selector){
 			if (!selector) return;
 			// console.log(selector);
 			sandbox.eval("new SubtleSlickSpeed.Test('"+selector+";;;"+String.escapeSingle(framework.name)+"', function(){ return "+framework.queryFn+"('"+String.escapeSingle(selector)+"') })");
@@ -144,35 +101,33 @@ var Frameworks = {
 	}
 };
 
-if (!window.didThisAlready) {
+function shouldExclude(str){
+	var q = Object.fromQueryString(document.location.search);
+	if (!q.exclude) return false;
 	
-	function shouldExclude(str){
-		var q = Object.fromQueryString(document.location.search);
-		if (!q.exclude) return false;
-		
-		q.exclude = $splat(q.exclude);
-		
-		for (var i = q.exclude.length - 1; i >= 0; i--){
-			if (q.exclude[i] == str) return true;
-		}
-		return false;
-	};
+	q.exclude = $splat(q.exclude);
 	
-	Object.each(Frameworks, function(framework, frameworkName){
-		
-		framework.name = frameworkName;
-		// console.log(q.exclude.indexOf(frameworkName))
-		if (!shouldExclude(Frameworks[frameworkName].js))
-			loadFrameworkTests(framework);
-	});
-	
-	var html = [], ex = document.getElementById('exclude');
-	html.push('Exclude: ');
-	for (var frameworkName in Frameworks) {
-		html.push('<label><input name="exclude" type="checkbox" '+ (shouldExclude(Frameworks[frameworkName].js) ? 'checked="checked"' : '') +' value="' + String.escapeDouble(Frameworks[frameworkName].js) + '" /> '+frameworkName+'</label>');
+	for (var i = q.exclude.length - 1; i >= 0; i--){
+		if (q.exclude[i] == str) return true;
 	}
-	html.push('<input type="submit" value="Exclude" />')
-	ex.innerHTML = html.join('');
+	return false;
+};
+
+Object.each(Frameworks, function(framework, frameworkName){
 	
-	window.didThisAlready = true;
+	framework.name = frameworkName;
+	// console.log(q.exclude.indexOf(frameworkName))
+	if (!shouldExclude(Frameworks[frameworkName].js))
+		loadFrameworkTests(framework);
+});
+
+var html = [], ex = document.getElementById('exclude');
+html.push('Exclude: ');
+for (var frameworkName in Frameworks) {
+	html.push('<label><input name="exclude" type="checkbox" '+ (shouldExclude(Frameworks[frameworkName].js) ? 'checked="checked"' : '') +' value="' + String.escapeDouble(Frameworks[frameworkName].js) + '" /> '+frameworkName+'</label>');
 }
+html.push('<input type="submit" value="Exclude" />')
+ex.innerHTML = html.join('');
+
+
+window.didThisAlready = true;}
