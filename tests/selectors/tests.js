@@ -56,6 +56,7 @@ function loadFrameworkTests(framework){
 		Array.each(SELECTORS, function(selector){
 			if (!selector) return;
 			// console.log(selector);
+			sandbox.eval("document.querySelectorAll = undefined; Element.prototype.querySelectorAll = undefined;");
 			sandbox.eval("new SubtleSlickSpeed.Test('"+selector+";;;"+String.escapeSingle(framework.name)+"', function(){ return "+framework.queryFn+"('"+String.escapeSingle(selector)+"') })");
 			// with (sandbox.window)
 			// new SubtleSlickSpeed.Test(selector+";;;"+framework.name, function(){
