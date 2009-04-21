@@ -67,7 +67,6 @@ function loadFrameworkTests(framework){
 	});
 }
 
-
 var Frameworks = {
 	'jQuery 1.2.6':{
 		js:'jq-126',
@@ -125,8 +124,10 @@ function shouldExclude(str){
 	return false;
 };
 
+Array.each(SELECTORS, UID.uidOf);
 Object.each(Frameworks, function(framework, frameworkName){
 	
+	UID.uidOf(frameworkName);
 	framework.name = frameworkName;
 	// console.log(q.exclude.indexOf(frameworkName))
 	if (!shouldExclude(Frameworks[frameworkName].js))
