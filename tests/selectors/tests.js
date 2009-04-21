@@ -104,7 +104,16 @@ var Frameworks = {
 	// 	js:'slick',
 	// 	queryFn:'SubtleSlickParse.nocache=true; SubtleSlickParse'
 	// },
-	'Slick (pre-alpha)':{
+	'NW Matcher 1.1.1':{
+		js:'nwmatcher',
+		runBefore:'NW.Dom.setCache(false);',
+		queryFn:'NW.Dom.select'
+	},
+	'Sly v1.0rc2':{
+		js:'sly',
+		queryFn:'Sly.search'
+	},
+	'Slick Experimental':{
 		js:'slick',
 		queryFn:'document.search'
 	},
@@ -112,11 +121,11 @@ var Frameworks = {
 		js:'slick_dsl',
 		runBefore:'Matcher.nocache=false;SubtleSlickParse.nocache=true;',
 		queryFn:'document.search'
-	},
-	'Evil Slick (no-cache)':{
-		js:'slick_dsl',
-		runBefore:'Matcher.nocache=true;SubtleSlickParse.nocache=true;',
-		queryFn:'document.search'
+	// },
+	// 'Evil Slick (no-cache)':{
+	// 	js:'slick_dsl',
+	// 	runBefore:'Matcher.nocache=true;SubtleSlickParse.nocache=true;',
+	// 	queryFn:'document.search'
 	}
 };
 
@@ -144,6 +153,8 @@ Object.each(Frameworks, function(framework, frameworkName){
 	// console.log(q.exclude.indexOf(frameworkName))
 	if (!shouldExclude(Frameworks[frameworkName].js))
 		loadFrameworkTests(framework);
+	else 
+		Frameworks[frameworkName].stop = true;
 });
 
 var html = [], ex = document.getElementById('exclude');
