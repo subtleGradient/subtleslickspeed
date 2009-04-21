@@ -3,45 +3,53 @@ if (!window.didThisAlready) {
 var SELECTORS = SELECTORS || '\
 body\n\
 div\n\
-body div\n\
-div p\n\
-div > p\n\
-div + p\n\
-div ~ p\n\
-div[class^=exa][class$=mple]\n\
-div p a\n\
-div, p, a\n\
-.note\n\
-div.example\n\
-ul .tocline2\n\
-div.example, div.note\n\
-#title\n\
-h1#title\n\
-div #title\n\
-ul.toc li.tocline2\n\
-ul.toc > li.tocline2\n\
-h1#title + div > p\n\
-h1[id]:contains(Selectors)\n\
-a[href][lang][class]\n\
-div[class]\n\
-div[class=example]\n\
-div[class^=exa]\n\
-div[class$=mple]\n\
-div[class*=e]\n\
-div[class|=dialog]\n\
-div[class!=made_up]\n\
-div[class~=example]\n\
-div:not(.example)\n\
-p:contains(selectors)\n\
-p:nth-child(even)\n\
-p:nth-child(2n)\n\
-p:nth-child(odd)\n\
-p:nth-child(2n+1)\n\
-p:nth-child(n)\n\
-p:only-child\n\
-p:last-child\n\
-p:first-child\n\
+span\n\
+a\n\
+a.fn\n\
+a.url\n\
+a.fn.url\n\
 ';
+// body\n\
+// div\n\
+// body div\n\
+// div p\n\
+// div > p\n\
+// div + p\n\
+// div ~ p\n\
+// div[class^=exa][class$=mple]\n\
+// div p a\n\
+// div, p, a\n\
+// .note\n\
+// div.example\n\
+// ul .tocline2\n\
+// div.example, div.note\n\
+// #title\n\
+// h1#title\n\
+// div #title\n\
+// ul.toc li.tocline2\n\
+// ul.toc > li.tocline2\n\
+// h1#title + div > p\n\
+// h1[id]:contains(Selectors)\n\
+// a[href][lang][class]\n\
+// div[class]\n\
+// div[class=example]\n\
+// div[class^=exa]\n\
+// div[class$=mple]\n\
+// div[class*=e]\n\
+// div[class|=dialog]\n\
+// div[class!=made_up]\n\
+// div[class~=example]\n\
+// div:not(.example)\n\
+// p:contains(selectors)\n\
+// p:nth-child(even)\n\
+// p:nth-child(2n)\n\
+// p:nth-child(odd)\n\
+// p:nth-child(2n+1)\n\
+// p:nth-child(n)\n\
+// p:only-child\n\
+// p:last-child\n\
+// p:first-child\n\
+// ';
 
 document.getElementById('SELECTORS').innerHTML = SELECTORS;
 SELECTORS = SELECTORS.split(/\r?\n/);
