@@ -128,6 +128,10 @@ Array.each(SELECTORS, UID.uidOf);
 Object.each(Frameworks, function(framework, frameworkName){
 	
 	UID.uidOf(frameworkName);
+	Array.each(SELECTORS, function(selector){
+		UID.uidOf(selector + frameworkName);
+	});
+	
 	framework.name = frameworkName;
 	// console.log(q.exclude.indexOf(frameworkName))
 	if (!shouldExclude(Frameworks[frameworkName].js))
