@@ -21,6 +21,7 @@
 	margin: 0 3px;
 }
 #report td div.bgw div{
+	white-space: nowrap;
 	background: #333;
 	color:#fff;
 	
@@ -122,7 +123,7 @@ td div.bgw div{
 #report-wrap.selector #report.hide_info tr td strong{
 /*	display:block;*/
 	font-size: 12px;
-	line-height: 28px;
+	line-height: 18px;
 	margin:0;padding:0;
 	
 	position: absolute;
@@ -134,7 +135,10 @@ td div.bgw div{
 	text-shadow: 0px 1px 1px #0072AB;
 }
 #report-wrap.selector #report.hide_info tr td strong.sec{
-	top:22px !important;
+	top:17px !important;
+}
+#report-wrap.selector #report.hide_info tr td strong.result{
+	top:34px !important;
 }
 #report-wrap.selector #report.hide_info tr:hover td div.bgw div{
 	background:#3A9CCC !important;

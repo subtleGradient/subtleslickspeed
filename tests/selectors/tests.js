@@ -56,8 +56,9 @@ function loadFrameworkTests(framework){
 		Array.each(SELECTORS, function(selector){
 			if (!selector) return;
 			// console.log(selector);
-			sandbox.eval("document.querySelectorAll = undefined; Element.prototype.querySelectorAll = undefined;");
-			sandbox.eval("new SubtleSlickSpeed.Test('"+selector+";;;"+String.escapeSingle(framework.name)+"', function(){ return "+framework.queryFn+"('"+String.escapeSingle(selector)+"') })");
+			// sandbox.eval("document.querySelectorAll = undefined; Element.prototype.querySelectorAll = undefined;");
+			framework.runBefore && sandbox.eval(framework.runBefore);
+			sandbox.eval("new SubtleSlickSpeed.Test('"+selector+";;;"+String.escapeSingle(framework.name)+"', function(){ return "+framework.queryFn+"('"+String.escapeSingle(selector)+"').length; })");
 			// with (sandbox.window)
 			// new SubtleSlickSpeed.Test(selector+";;;"+framework.name, function(){
 			// 	return framework.queryFn(selector);
@@ -98,6 +99,16 @@ var Frameworks = {
 	// },
 	'Slick (pre-alpha)':{
 		js:'slick',
+		queryFn:'document.search'
+	},
+	'Evil Slick':{
+		js:'slick_dsl',
+		runBefore:'Matcher.nocache=false;SubtleSlickParse.nocache=true;',
+		queryFn:'document.search'
+	},
+	'Evil Slick (no-cache)':{
+		js:'slick_dsl',
+		runBefore:'Matcher.nocache=true;SubtleSlickParse.nocache=true;',
 		queryFn:'document.search'
 	}
 };
