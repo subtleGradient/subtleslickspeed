@@ -83,8 +83,6 @@
 		<label><input onclick="infoSwap(this.value);" type="radio" name="info" value="" /> Show</label>
 		<label><input onclick="infoSwap(this.value);" type="radio" name="info" value="hide_info" checked="checked" /> Hide</label>
 	</div>
-	<form class="toolbar" id="exclude">
-	</form>
 	<pre id="log" class="box">
 	</pre>
 	
@@ -102,6 +100,8 @@
 		if (q.MIN_RUN_TIME ) SubtleSlickSpeed.Test.MIN_RUN_TIME  = parseInt(q.MIN_RUN_TIME  ,10);
 		
 		if (q.REPORT_TIMEOUT) SubtleSlickSpeed.Report.TIMEOUT  = parseInt(q.REPORT_TIMEOUT  ,10);
+		var disableQSA = false; if (q.disableQSA) disableQSA  = !!q.disableQSA;
+		var disableGBC = false; if (q.disableGBC) disableGBC  = !!q.disableGBC;
 		var SELECTORS = '';
 		if (q.SELECTORS) SELECTORS = q.SELECTORS;
 		var STOP = !!q.STOP;
@@ -114,21 +114,32 @@
 	
 	
 	
-	<form action="" method="get" class="toolbar" onsubmit="return confirm('Changing the minimum times could really freak out your browser. I assume you know what you\'re doing');">
+	<form action="" method="get" onsubmit="return confirm('Changing the minimum times could really freak out your browser. I assume you know what you\'re doing');">
 		Defaults:
 		<input type="reset" value="Cancel" />
 		<input type="submit" value="Update" />
 		<br />
 		
-		<script type="text/javascript" charset="utf-8">
-		document.write('<label>Iterations     <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_ITERS     +'" name="MIN_ITERS" /> </label> ');
-		document.write('<label>Runs           <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_RUNS      +'" name="MIN_RUNS" /> </label> ');
-		document.write(' | <label>Iteration Time <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_ITER_TIME +'" name="MIN_ITER_TIME" /><em>ms</em> </label> ');
-		document.write('<label>Run Time       <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_RUN_TIME  +'" name="MIN_RUN_TIME" /><em>ms</em> </label> ');
-		document.write(' | <label>Stop Autorun <input type="checkbox" value="1" name="STOP" '+( STOP ? 'checked="checked"' : '' )+' /> </label> ');
-		document.write('<label>Report Timeout <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Report.TIMEOUT     +'" name="REPORT_TIMEOUT" /><em>ms</em> </label> ');
-		document.write('<br /><label>Selectors<br /> <textarea name="SELECTORS" id="SELECTORS">'+String.escapeHTML(SELECTORS)+'</textarea></label> ');
-		</script>
+		<div id="exclude" class="toolbar">
+		</div>
+		<div class="toolbar">
+			Disable Freatures (emulate other browsers): 
+			<script type="text/javascript" charset="utf-8">
+			document.write('<label>querySelectorAll<input type="checkbox" class="number" size="4" value="1" '+(disableQSA ? 'checked="checked"' : '')+' name="disableQSA" /> </label> ');
+			document.write('<label>getByClass      <input type="checkbox" class="number" size="4" value="1" '+(disableGBC ? 'checked="checked"' : '')+' name="disableGBC" /> </label> ');
+			document.write('<br /><label>Selectors<br /> <textarea name="SELECTORS" id="SELECTORS">'+String.escapeHTML(SELECTORS)+'</textarea></label> ');
+			</script>
+		</div>
+		<div class="toolbar">
+			<script type="text/javascript" charset="utf-8">
+			document.write(' | <label>Iterations     <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_ITERS     +'" name="MIN_ITERS" /> </label> ');
+			document.write('<label>Runs           <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_RUNS      +'" name="MIN_RUNS" /> </label> ');
+			document.write(' | <label>Iteration Time <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_ITER_TIME +'" name="MIN_ITER_TIME" /><em>ms</em> </label> ');
+			document.write('<label>Run Time       <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_RUN_TIME  +'" name="MIN_RUN_TIME" /><em>ms</em> </label> ');
+			document.write(' | <label>Stop Autorun <input type="checkbox" value="1" name="STOP" '+( STOP ? 'checked="checked"' : '' )+' /> </label> ');
+			document.write('<label>Report Timeout <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Report.TIMEOUT     +'" name="REPORT_TIMEOUT" /><em>ms</em> </label> ');
+			</script>
+		</div>
 	</form>
 	
 	<div class="toolbar">

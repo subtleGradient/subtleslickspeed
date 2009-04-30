@@ -8,55 +8,58 @@ a\n\
 a.fn\n\
 a.url\n\
 a.fn.url\n\
+body\n\
+div\n\
+body div\n\
+div p\n\
+div > p\n\
+div + p\n\
+div ~ p\n\
+div[class^=exa][class$=mple]\n\
+div p a\n\
+div, p, a\n\
+.note\n\
+div.example\n\
+ul .tocline2\n\
+div.example, div.note\n\
+#title\n\
+h1#title\n\
+div #title\n\
+ul.toc li.tocline2\n\
+ul.toc > li.tocline2\n\
+h1#title + div > p\n\
+h1[id]:contains(Selectors)\n\
+a[href][lang][class]\n\
+div[class]\n\
+div[class=example]\n\
+div[class^=exa]\n\
+div[class$=mple]\n\
+div[class*=e]\n\
+div[class|=dialog]\n\
+div[class!=made_up]\n\
+div[class~=example]\n\
+div:not(.example)\n\
+p:contains(selectors)\n\
+p:nth-child(even)\n\
+p:nth-child(2n)\n\
+p:nth-child(odd)\n\
+p:nth-child(2n+1)\n\
+p:nth-child(n)\n\
+p:only-child\n\
+p:last-child\n\
+p:first-child\n\
 ';
-// body\n\
-// div\n\
-// body div\n\
-// div p\n\
-// div > p\n\
-// div + p\n\
-// div ~ p\n\
-// div[class^=exa][class$=mple]\n\
-// div p a\n\
-// div, p, a\n\
-// .note\n\
-// div.example\n\
-// ul .tocline2\n\
-// div.example, div.note\n\
-// #title\n\
-// h1#title\n\
-// div #title\n\
-// ul.toc li.tocline2\n\
-// ul.toc > li.tocline2\n\
-// h1#title + div > p\n\
-// h1[id]:contains(Selectors)\n\
-// a[href][lang][class]\n\
-// div[class]\n\
-// div[class=example]\n\
-// div[class^=exa]\n\
-// div[class$=mple]\n\
-// div[class*=e]\n\
-// div[class|=dialog]\n\
-// div[class!=made_up]\n\
-// div[class~=example]\n\
-// div:not(.example)\n\
-// p:contains(selectors)\n\
-// p:nth-child(even)\n\
-// p:nth-child(2n)\n\
-// p:nth-child(odd)\n\
-// p:nth-child(2n+1)\n\
-// p:nth-child(n)\n\
-// p:only-child\n\
-// p:last-child\n\
-// p:first-child\n\
-// ';
 
 document.getElementById('SELECTORS').innerHTML = SELECTORS;
 SELECTORS = SELECTORS.split(/\r?\n/);
+var q = Object.fromQueryString(document.location.search);
 
 function loadFrameworkTests(framework){
 	var url = 'lib/frameworks/'+framework.js+'.js';
 	var sandbox = new SubtleSlickSpeed.Test.Sandboxed(framework.name, ["tests/selectors/template.js", url]);
+	
+	if (disableQSA) sandbox.eval('document.querySelectorAll = undefined;Element.prototype.querySelectorAll = undefined;');
+	if (disableGBC) sandbox.eval('document.getElementsByClassName = undefined;Element.prototype.getElementsByClassName = undefined;');
 	sandbox.addEvent('load:'+url, function(){
 		
 		// framework.queryFn = sandbox.eval(framework.queryFn);
@@ -113,8 +116,14 @@ var Frameworks = {
 		js:'sly',
 		queryFn:'Sly.search'
 	},
-	'Slick Experimental':{
+	'Slick (case)':{
 		js:'slick',
+		runBefore:'document.search = function(selector){return slick(document,selector)};',
+		queryFn:'document.search'
+	},
+	'Slick (moo2)':{
+		js:'slick-moo2',
+		runBefore:'document.search = function(selector){return slick(document,selector)};',
 		queryFn:'document.search'
 	},
 	'Evil Slick':{
@@ -130,7 +139,6 @@ var Frameworks = {
 };
 
 function shouldExclude(str){
-	var q = Object.fromQueryString(document.location.search);
 	if (!q.exclude) return false;
 	
 	q.exclude = $splat(q.exclude);
@@ -162,7 +170,7 @@ html.push('Exclude: ');
 for (var frameworkName in Frameworks) {
 	html.push('<label><input name="exclude" type="checkbox" '+ (shouldExclude(Frameworks[frameworkName].js) ? 'checked="checked"' : '') +' value="' + String.escapeDouble(Frameworks[frameworkName].js) + '" /> '+frameworkName+'</label>');
 }
-html.push('<input type="submit" value="Exclude" />')
+// html.push('<input type="submit" value="Exclude" />')
 ex.innerHTML = html.join('');
 
 
